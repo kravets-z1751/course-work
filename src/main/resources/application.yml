@@ -1,0 +1,14 @@
+spring.datasource:
+  url: jdbc:postgresql://localhost:5432/course_work
+  username: postgres
+  password: postgres
+  hikari:
+    connectionTimeout: 20000
+    maximumPoolSize: 5
+
+spring:
+  jpa:
+    hibernate.ddl-auto: validate
+    generate-ddl: true
+    show-sql: true
+    open-in-view: false
