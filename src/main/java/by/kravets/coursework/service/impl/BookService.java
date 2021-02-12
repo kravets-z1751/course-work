@@ -21,6 +21,8 @@ public class BookService extends BaseService<Book, BookRepository> {
   }
 
   public Page<BookRow> getBooks(Integer countryId, Pageable pageable) {
-    return getRepository().getBooks(countryId, pageable);
+    return countryId == null ?
+        getRepository().getBooks(pageable) :
+        getRepository().getBooks(countryId, pageable);
   }
 }

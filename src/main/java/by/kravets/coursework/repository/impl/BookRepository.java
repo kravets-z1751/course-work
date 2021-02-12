@@ -33,7 +33,15 @@ public interface BookRepository extends BaseRepository<Book> {
       + "FROM books b\n"
       + "    INNER JOIN authors a on a.id = b.author_id\n"
       + "    INNER JOIN countries c on c.id = a.country_id\n"
-      + "WHERE CASE WHEN pg_typeof(:countryId) = pg_typeof('null'\\:\\:bytea) THEN true ELSE c.id\\:\\:INT = :countryId\\:\\:INT END "
+      + "WHERE c.id = :countryId "
       + "ORDER BY b.name ", nativeQuery = true)
   Page<BookRow> getBooks(@Param("countryId") Integer countryId, Pageable pageable);
+
+  @Query(value = "SELECT b.id as bookId, b.name as bookName, a.id as authorId, "
+      + "concat(a.surname, ' ',a.name, ' ',a.patronymic) as authorFullName, c.name as countryName "
+      + "FROM books b\n"
+      + "    INNER JOIN authors a on a.id = b.author_id\n"
+      + "    INNER JOIN countries c on c.id = a.country_id\n"
+      + "ORDER BY b.name ", nativeQuery = true)
+  Page<BookRow> getBooks(Pageable pageable);
 }

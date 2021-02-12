@@ -37,7 +37,6 @@ public class BookController extends BaseController<Book, BookService> {
 
   @GetMapping
   public String getList(@RequestParam(required = false) Integer countryId, Pageable pageable, Model model) {
-    if (countryId == null) countryId = 1;
     model.addAttribute("page", getService().getBooks(countryId, pageable));
     return getListPage();
   }

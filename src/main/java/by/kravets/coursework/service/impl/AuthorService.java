@@ -3,8 +3,9 @@ package by.kravets.coursework.service.impl;
 import by.kravets.coursework.entity.impl.Author;
 import by.kravets.coursework.repository.impl.AuthorRepository;
 import by.kravets.coursework.service.BaseService;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,8 +19,10 @@ public class AuthorService extends BaseService<Author, AuthorRepository> {
     return repository;
   }
 
-  public List<Author> getCountryAuthors(Integer countryId) {
-    return getRepository().findByCountryId(countryId);
+  public Page<Author> getAuthors(Integer countryId, Pageable pageable) {
+    return countryId == null ?
+        getRepository().getAuthors(pageable) :
+        getRepository().getAuthors(countryId, pageable);
   }
 
 }
