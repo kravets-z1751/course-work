@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div th:fragment="go_back" class="p-3">
+  <button onclick="goBack()" type="button" class="btn btn-secondary">Назад</button>
+  <script>
+    function goBack() {
+      window.location = document.referrer;
+    }
+  </script>
+</div>
+
+</body>
+</html>

@@ -1,1 +1,1 @@
--- CREATE DATABASE course_work;
+CREATE DATABASE course_work;

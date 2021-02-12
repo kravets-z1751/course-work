@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<div th:replace="common/header::header"></div>
+<body>
+<div th:replace="common/go_back::go_back"></div>
+<div class="container">
+  <table class="table table-striped">
+    <tbody>
+    <tr>
+      <td>Идентификатор</td>
+      <td th:text="${book.id}"></td>
+    </tr>
+    <tr>
+      <td>Название</td>
+      <td th:text="${book.name}"></td>
+    </tr>
+    <tr>
+      <td>Описание</td>
+      <td th:text="${book.definition}"></td>
+    </tr>
+    <tr>
+      <td>Год</td>
+      <td th:text="${#temporals.format(book.date, 'yyyy')}"></td>
+    </tr>
+    <tr>
+      <td>Автор</td>
+      <td >
+        <a th:href="'/author/'+${author.id}" class="link-secondary"
+           th:text="${author.surname + ' ' + author.name + ' ' + author.patronymic}"></a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <script>
+
+  </script>
+</div>
+</body>
+</html>

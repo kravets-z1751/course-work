@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<div th:replace="common/header::header"></div>
+<body>
+<div th:replace="common/go_back::go_back"></div>
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">Название</th>
+      <th scope="col">Автор</th>
+      <th scope="col">Страна</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="entity : ${page.content}">
+      <td><a th:href="'book/' + ${entity.bookId}" class="link-secondary"
+             th:text="${entity.bookName}"></a></td>
+      <td><a th:href="'author/' + ${entity.authorId}" class="link-secondary"
+             th:text="${entity.authorFullName}"></a></td>
+      <td><span th:text="${entity.countryName}"></span></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>
