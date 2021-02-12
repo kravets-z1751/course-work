@@ -5,11 +5,11 @@
   <title>Title</title>
 </head>
 <body>
-<div th:fragment="go_back" class="p-3">
-  <button onclick="goBack()" type="button" class="btn btn-secondary">Назад</button>
+<div th:fragment="go_back(url)" class="p-3">
+  <button th:onclick="goBack([[${url}]])" type="button" class="btn btn-secondary">Назад</button>
   <script>
-    function goBack() {
-      window.location = document.referrer;
+    function goBack(url) {
+      window.location = url;
     }
   </script>
 </div>
