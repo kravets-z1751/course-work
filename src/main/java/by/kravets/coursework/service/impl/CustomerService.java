@@ -13,6 +13,16 @@ public class CustomerService extends BaseService<Customer, CustomerRepository> {
   private final CustomerRepository repository;
 
   @Override
+  public String getViewPage() {
+    return null;
+  }
+
+  @Override
+  public String getListPage() {
+    return null;
+  }
+
+  @Override
   protected CustomerRepository getRepository() {
     return repository;
   }

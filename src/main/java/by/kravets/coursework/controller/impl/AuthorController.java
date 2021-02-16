@@ -6,6 +6,8 @@ import by.kravets.coursework.service.impl.AuthorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,16 +22,6 @@ public class AuthorController extends BaseController<Author, AuthorService> {
   private final AuthorService service;
 
   @Override
-  protected String getViewPage() {
-    return "author/view";
-  }
-
-  @Override
-  protected String getListPage() {
-    return "author/list";
-  }
-
-  @Override
   protected AuthorService getService() {
     return service;
   }
@@ -38,14 +30,13 @@ public class AuthorController extends BaseController<Author, AuthorService> {
   public String getList(@RequestParam(required = false) Integer countryId,
       Pageable pageable, Model model) {
     model.addAttribute("page", getService().getAuthors(countryId, pageable));
-    return getListPage();
+    return getService().getListPage();
   }
 
   @GetMapping("/{id}")
+  @Transactional(propagation = Propagation.REQUIRES_NEW)
   public String getOne(@PathVariable Integer id, Model model) {
-    Author author = getService().getOne(id);
-    model.addAttribute("author", author);
-    return getViewPage();
+    return getService().getAuthorDetails(id, model);
   }
 
 

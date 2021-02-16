@@ -10,12 +10,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "customers")
 @NoArgsConstructor
@@ -30,7 +30,7 @@ public class Customer extends BaseEntity {
   private String phone;
   private String email;
 
-  @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   private Set<Order> orders;
 
 }

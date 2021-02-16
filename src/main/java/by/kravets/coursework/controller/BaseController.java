@@ -10,10 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 public abstract class BaseController<E extends BaseEntity,
     T extends BaseService<E, ? extends JpaRepository<E, Integer>>> {
 
-  protected abstract String getViewPage();
-
-  protected abstract String getListPage();
-
   protected abstract T getService();
 
   @PostMapping

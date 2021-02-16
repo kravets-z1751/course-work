@@ -16,6 +16,16 @@ public class OrderService extends BaseService<Order, OrderRepository> {
   private final OrderRepository repository;
 
   @Override
+  public String getViewPage() {
+    return null;
+  }
+
+  @Override
+  public String getListPage() {
+    return null;
+  }
+
+  @Override
   protected OrderRepository getRepository() {
     return repository;
   }

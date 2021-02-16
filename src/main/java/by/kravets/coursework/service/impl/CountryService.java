@@ -13,6 +13,16 @@ public class CountryService extends BaseService<Country, CountryRepository> {
   private final CountryRepository repository;
 
   @Override
+  public String getViewPage() {
+    return null;
+  }
+
+  @Override
+  public String getListPage() {
+    return null;
+  }
+
+  @Override
   protected CountryRepository getRepository() {
     return repository;
   }

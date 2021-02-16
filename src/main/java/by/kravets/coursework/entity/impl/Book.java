@@ -2,21 +2,18 @@ package by.kravets.coursework.entity.impl;
 
 import by.kravets.coursework.entity.BaseEntity;
 import java.time.LocalDate;
-import java.util.Set;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "books")
 @NoArgsConstructor
@@ -28,7 +25,6 @@ public class Book extends BaseEntity {
   private String definition;
   private LocalDate date;
 
-  @ManyToOne
-  @JoinColumn(name = "author_id")
+  @ManyToOne(fetch = FetchType.LAZY)
   private Author author;
 }

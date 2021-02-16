@@ -21,24 +21,15 @@ public class BookController extends BaseController<Book, BookService> {
   private final BookService service;
 
   @Override
-  protected String getViewPage() {
-    return "book/view";
-  }
-
-  @Override
-  protected String getListPage() {
-    return "book/list";
-  }
-
-  @Override
   protected BookService getService() {
     return service;
   }
 
   @GetMapping
-  public String getList(@RequestParam(required = false) Integer countryId, Pageable pageable, Model model) {
+  public String getList(@RequestParam(required = false) Integer countryId, Pageable pageable,
+      Model model) {
     model.addAttribute("page", getService().getBooks(countryId, pageable));
-    return getListPage();
+    return getService().getListPage();
   }
 
   @GetMapping("/{id}")
@@ -47,7 +38,7 @@ public class BookController extends BaseController<Book, BookService> {
     Author author = book.getAuthor();
     model.addAttribute("book", book);
     model.addAttribute("author", author);
-    return getViewPage();
+    return getService().getViewPage();
   }
 
 }

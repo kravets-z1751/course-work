@@ -26,6 +26,18 @@
       <td>Дата рождения</td>
       <td th:text="${#temporals.format(author.dateOfBirth)}"></td>
     </tr>
+    <tr>
+      <td colspan="2">
+        <table class="table table-striped">
+          <tr th:each="book : ${books}">
+            <td>
+              <a th:href="'book/' + ${book.id}" class="link-secondary"
+                 th:text="${book.name}"></a>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
     </tbody>
   </table>
   <script>

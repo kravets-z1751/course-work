@@ -1,7 +1,6 @@
 package by.kravets.coursework.entity.impl;
 
 import by.kravets.coursework.entity.BaseEntity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDate;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -13,12 +12,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "authors")
 @NoArgsConstructor
@@ -31,12 +30,9 @@ public class Author extends BaseEntity {
   private String patronymic;
   private LocalDate dateOfBirth;
 
-  @JsonIgnore
-  @ManyToOne
-  @JoinColumn(name = "country_id")
+  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private Country country;
 
-  @JsonIgnore
   @OneToMany(mappedBy = "author", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private Set<Book> books;
 

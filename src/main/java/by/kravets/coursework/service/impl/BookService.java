@@ -16,6 +16,16 @@ public class BookService extends BaseService<Book, BookRepository> {
   private final BookRepository repository;
 
   @Override
+  public String getViewPage() {
+    return "book/view";
+  }
+
+  @Override
+  public String getListPage() {
+    return "book/list";
+  }
+
+  @Override
   protected BookRepository getRepository() {
     return repository;
   }
