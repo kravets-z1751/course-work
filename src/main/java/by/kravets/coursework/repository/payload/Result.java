@@ -1,10 +1,13 @@
 package by.kravets.coursework.repository.payload;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public interface OrderInfo {
+public interface Result {
 
   Integer getId();
+
+  String getName();
 
   LocalDateTime getCreated_At();
 
@@ -21,4 +24,14 @@ public interface OrderInfo {
   String getCustomerPhone();
 
   String getCustomerEmail();
+
+  Integer getCount();
+
+  BigDecimal getAmount();
+
+  String getProcess_Time();
+
+  String getBook_Author();
+
+  String getCustomer();
 }

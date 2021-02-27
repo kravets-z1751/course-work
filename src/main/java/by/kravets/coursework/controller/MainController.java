@@ -17,10 +17,14 @@ public class MainController {
   @GetMapping
   public String get(Model model) {
 
-    model.addAttribute("orders", service.getOrders());
-    model.addAttribute("ordersDiff", service.getOrdersDiff());
-    model.addAttribute("countOrders", service.getCountOrders());
-    model.addAttribute("countOrdersAmount", service.getCountOrdersAmount());
+    model.addAttribute("result61", service.get61());
+    model.addAttribute("result62", service.get62());
+    model.addAttribute("result63", service.get63());
+    model.addAttribute("result64", service.get64());
+    model.addAttribute("result65", service.get65());
+    model.addAttribute("result66", service.get66());
+    model.addAttribute("result69", service.get69());
+    model.addAttribute("result610", service.get610());
     return "list";
   }
 

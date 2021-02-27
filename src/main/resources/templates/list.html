@@ -73,7 +73,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="entity : ${orders}">
+    <tr th:each="entity : ${result61}">
       <td><span th:text="${entity.id}"></span></td>
       <td><span th:text="${#temporals.format(entity.created_At, 'dd-MM-yyyy HH:mm')}"></span></td>
       <td><span th:text="${entity.description}"></span></td>
@@ -108,7 +108,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="entity : ${ordersDiff}">
+    <tr th:each="entity : ${result62}">
       <td><span th:text="${entity.id}"></span></td>
       <td><span th:text="${#temporals.format(entity.created_At, 'dd-MM-yyyy HH:mm')}"></span></td>
       <td><span th:text="${entity.description}"></span></td>
@@ -137,7 +137,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="entity : ${countOrders}">
+    <tr th:each="entity : ${result63}">
       <td><span th:text="${entity.customer_Id}"></span></td>
       <td><span th:text="${entity.count}"></span></td>
     </tr>
@@ -164,10 +164,95 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="entity : ${countOrdersAmount}">
+    <tr th:each="entity : ${result64}">
       <td><span th:text="${entity.customer_Id}"></span></td>
       <td><span th:text="${entity.count}"></span></td>
       <td><span th:text="${entity.amount}"></span></td>
+    </tr>
+    </tbody>
+  </table>
+  <table class="table table-striped" cellpadding="0" cellspacing="0">
+    <thead>
+    <tr class="task_header">
+      <th scope="col" colspan="5">
+        6.5. Создать запрос с выполнением групповой операции над данными и отбором определенных групп
+      </th>
+    </tr>
+    <tr class="task_header">
+      <th scope="col" colspan="5">
+        <code>
+          SELECT customer_id, COUNT(*), sum(amount) as amount
+          FROM orders
+                  INNER JOIN order_books ob on orders.id = ob.order_id
+                   INNER JOIN books b on b.id = ob.book_id
+          GROUP BY customer_id HAVING count(*) > 2
+        </code>
+      </th>
+    </tr>
+    <tr>
+      <th scope="col">ID клиента</th>
+      <th scope="col">Количество заказов</th>
+      <th scope="col">Сумма</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="entity : ${result65}">
+      <td><span th:text="${entity.customer_Id}"></span></td>
+      <td><span th:text="${entity.count}"></span></td>
+      <td><span th:text="${entity.amount}"></span></td>
+    </tr>
+    </tbody>
+  </table>
+  <table class="table table-striped" cellpadding="0" cellspacing="0">
+    <thead>
+    <tr class="task_header">
+      <th scope="col" colspan="8">
+        6.6. Разработать запрос на языке SQL, результирующая таблица которого соответствовала бы по структуре записи таблице, созданной по агрегированной сущности, но объекты бы представлялись своими наименованиями, взятыми из соответствующих таблиц-справочников, с условием отбора по одному полю. Выполнить сортировку.
+        <br/>6.7. Разработать запрос на языке SQL, результирующая таблица которого, должна содержать все поля предыдущего запроса и добавить вычисляемое поле. Выполнить сортировку по нескольким полям.
+        <br/>6.8. Разработать запросы на языке SQL, выполняющий объединение нескольких таблиц.
+      </th>
+    </tr>
+    <tr class="task_header">
+      <th scope="col" colspan="8">
+        <code>
+          SELECT o.id,
+                   o.created_at,
+                   o.description,
+                   o.issued_at,
+                    (o.created_at - o.issued_at)::varchar                    AS process_time,
+                   b.name,
+                   concat(a.surname, ' ', a.name, ' ', a.patronymic) AS book_author,
+                   concat(c.surname, ' ', c.name, ' ', c.patronymic) AS customer
+            FROM orders o
+                     INNER JOIN customers c on c.id = o.customer_id
+                     INNER JOIN order_books ob on o.id = ob.order_id
+                     INNER JOIN books b on b.id = ob.book_id
+                     INNER JOIN authors a on a.id = b.author_id
+            ORDER BY o.created_at DESC, concat(a.surname, ' ', a.name, ' ', a.patronymic);
+        </code>
+      </th>
+    </tr>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Дата создания</th>
+      <th scope="col">Описание</th>
+      <th scope="col">Дата выдачи</th>
+      <th scope="col">Время обработки</th>
+      <th scope="col">Название</th>
+      <th scope="col">Автор</th>
+      <th scope="col">Клиент</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="entity : ${result66}">
+      <td><span th:text="${entity.id}"></span></td>
+      <td><span th:text="${entity.created_At}"></span></td>
+      <td><span th:text="${entity.description}"></span></td>
+      <td><span th:text="${entity.issued_At}"></span></td>
+      <td><span th:text="${entity.process_Time}"></span></td>
+      <td><span th:text="${entity.name}"></span></td>
+      <td><span th:text="${entity.book_Author}"></span></td>
+      <td><span th:text="${entity.customer}"></span></td>
     </tr>
     </tbody>
   </table>
