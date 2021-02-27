@@ -16,7 +16,8 @@ CREATE TABLE public.books (
                               definition character varying(255),
                               name character varying(255),
                               author_id integer,
-                              amount numeric(19, 2)
+                              amount numeric(19, 2),
+                              count integer
 );
 
 CREATE TABLE public.countries (
@@ -276,8 +277,41 @@ $$;
 
 -- 9.3. Разработать триггеры разных типов для разных таблиц (не менее 3). Желательно, чтобы триггеры производили обработку или анализ данных.
 -- 1 --
+CREATE OR REPLACE FUNCTION function_reduce_count()
+    RETURNS TRIGGER
+    LANGUAGE PLPGSQL
+AS
+$$
+BEGIN
+    UPDATE books
+    SET count = (SELECT count - 1 FROM books WHERE id = NEW.book_id)
+    WHERE id = NEW.book_id;
+    RETURN NEW;
+END;
+$$;
+
+DROP FUNCTION function_reduce_count();
+
+CREATE TRIGGER trigger_reduce_count
+    AFTER INSERT
+    ON order_books
+    FOR EACH ROW EXECUTE PROCEDURE function_reduce_count();
 -- 2 --
--- 3 --
+CREATE OR REPLACE FUNCTION function_increase_amount()
+    RETURNS TRIGGER
+    LANGUAGE PLPGSQL
+AS
+$$
+BEGIN
+    NEW.amount = NEW.amount + 50;
+    RETURN NEW;
+END;
+$$;
+
+CREATE TRIGGER trigger_increase_amount
+    BEFORE INSERT
+    ON books
+    FOR EACH ROW EXECUTE PROCEDURE function_increase_amount();
 
 -- 9.4. Разработать несколько триггеров и/или хранимых процедур с использованием курсоров.
 CREATE OR REPLACE FUNCTION get_book_titles(p_author_id INTEGER)
