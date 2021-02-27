@@ -1,6 +1,7 @@
 package by.kravets.coursework.repository.payload;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public interface Result {
@@ -34,4 +35,12 @@ public interface Result {
   String getBook_Author();
 
   String getCustomer();
+
+  LocalDate getDate_Of_Birth();
+
+  String getPatronymic();
+
+  String getSurname();
+
+  Integer getCountry_Id();
 }

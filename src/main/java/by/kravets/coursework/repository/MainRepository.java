@@ -65,7 +65,7 @@ public interface MainRepository extends JpaRepository<Order, Integer> {
   List<Result> get69();
 
   //6.10. Разработать запрос на языке SQL с самосоединением таблицы.
-  @Query(value = "SELECT o1.id, o1.description FROM orders o1 JOIN orders o2 ON o1.customer_id = o2.customer_id;", nativeQuery = true)
+  @Query(value = "SELECT o1.id, o1.description FROM orders o1 JOIN orders o2 ON o1.customer_id = o2.customer_id WHERE o1.customer_id = 1;", nativeQuery = true)
   List<Result> get610();
 
 }

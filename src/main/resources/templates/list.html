@@ -256,6 +256,66 @@
     </tr>
     </tbody>
   </table>
+  <table class="table table-striped" cellpadding="0" cellspacing="0">
+    <thead>
+    <tr class="task_header">
+      <th scope="col" colspan="6">
+        6.9. Разработать запрос на языке SQL, выполняющий пересечение нескольких таблиц. Разработать запросы на языке SQL с различными видами подзапросов: с однострочными и многострочными операторами сравнения, с табличными выражениями
+      </th>
+    </tr>
+    <tr class="task_header">
+      <th scope="col" colspan="6">
+        <code>
+          SELECT * FROM authors WHERE id IN (SELECT author_id FROM books);
+        </code>
+      </th>
+    </tr>
+    <tr>
+      <th scope="col">ID автора</th>
+      <th scope="col">Дата рождения</th>
+      <th scope="col">Имя</th>
+      <th scope="col">Отчество</th>
+      <th scope="col">Фамилия</th>
+      <th scope="col">ID страны</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="entity : ${result69}">
+      <td><span th:text="${entity.id}"></span></td>
+      <td><span th:text="${entity.date_Of_Birth}"></span></td>
+      <td><span th:text="${entity.name}"></span></td>
+      <td><span th:text="${entity.patronymic}"></span></td>
+      <td><span th:text="${entity.surname}"></span></td>
+      <td><span th:text="${entity.country_Id}"></span></td>
+    </tr>
+    </tbody>
+  </table>
+  <table class="table table-striped" cellpadding="0" cellspacing="0">
+    <thead>
+    <tr class="task_header">
+      <th scope="col" colspan="5">
+        6.10. Разработать запрос на языке SQL с самосоединением таблицы
+      </th>
+    </tr>
+    <tr class="task_header">
+      <th scope="col" colspan="5">
+        <code>
+          SELECT o1.id, o1.description FROM orders o1 JOIN orders o2 ON o1.customer_id = o2.customer_id WHERE o1.customer_id = 1;
+        </code>
+      </th>
+    </tr>
+    <tr>
+      <th scope="col">ID заказа</th>
+      <th scope="col">Описание</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="entity : ${result610}">
+      <td><span th:text="${entity.id}"></span></td>
+      <td><span th:text="${entity.description}"></span></td>
+    </tr>
+    </tbody>
+  </table>
 </div>
 
 </body>
