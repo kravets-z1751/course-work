@@ -290,8 +290,6 @@ BEGIN
 END;
 $$;
 
-DROP FUNCTION function_reduce_count();
-
 CREATE TRIGGER trigger_reduce_count
     AFTER INSERT
     ON order_books
