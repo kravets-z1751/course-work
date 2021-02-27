@@ -1,6 +1,7 @@
 package by.kravets.coursework.entity.impl;
 
 import by.kravets.coursework.entity.BaseEntity;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -27,4 +28,6 @@ public class Book extends BaseEntity {
 
   @ManyToOne(fetch = FetchType.LAZY)
   private Author author;
+
+  private BigDecimal amount;
 }

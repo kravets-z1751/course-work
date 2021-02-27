@@ -1,4 +1,4 @@
-package by.kravets.coursework.repository.impl.payload;
+package by.kravets.coursework.repository.payload;
 
 public interface BookRow {
 
